@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Work CV</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap"
+	rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet"
+	th:href="@{/assets/css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/animate.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/aos.css}">
+<link rel="stylesheet" th:href="@{/assets/css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{/assets/css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{/assets/css/css/bootstrap-reboot.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/css/mixins/_text-hide.css}">
+<link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+<link rel="stylesheet" th:href="@{/assets/css/icomoon.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/bootstrap/bootstrap-grid.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/bootstrap/bootstrap-reboot.css}">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<style>
+a {
+	text-decoration: none;
+}
+</style>
+<!-- JS -->
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/jquery-migrate-3.0.1.min.js}"></script>
+<script th:src="@{/assets/js/popper.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/assets/js/jquery.waypoints.min.js}"></script>
+<script th:src="@{/assets/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script th:src="@{/assets/js/aos.js}"></script>
+<script th:src="@{/assets/js/jquery.animateNumber.min.js}"></script>
+<script th:src="@{/assets/js/scrollax.min.js}"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script th:src="@{/assets/js/google-map.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid px-md-4	">
+			<a class="navbar-brand" th:href="@{/homePage/home}">Work</a>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a th:href="@{/homePage/home}"
+						class="nav-link">Trang chủ</a></li>
+					<li class="'nav-item"><a href="/" class="nav-link"
+						sec:authorize="hasRole('EMPLOYER')"
+						th:href="@{/post/showPostList(page=0, companyId=${userLoggedIn.company.id})}">Danh
+							sách bài đăng</a></li>
+					<li class="nav-item"><a th:href="@{/showCandidates}" class="nav-link"
+						sec:authorize="hasRole('EMPLOYER')">Ứng cử viên</a></li>
+					<li class="nav-item cta mr-md-1"><a
+						th:href="@{/post/showPostRecruitment}" class="nav-link"
+						sec:authorize="hasRole('EMPLOYER')">Đăng tuyển</a></li>
+					<li class="nav-item cta cta-colored"
+						sec:authorize="!isAuthenticated()"><a
+						th:href="@{/auth/loginRegisterPage}" class="nav-link">Đăng
+							nhập</a></li>
+					<li class="nav-item active" sec:authorize="isAuthenticated()"><a
+						th:href="@{/profile/showProfile}" class="nav-link"
+						th:text="'Hồ sơ:' + ${userLoggedIn.fullName}"></a></li>
+					<li sec:authorize="isAuthenticated()">
+						<form action="#" th:action="@{/logout}" method="post">
+							<input type="submit"
+								style="border: none; background-color: #FFFFFF; margin-top: 6px;"
+								value="Đăng xuất" />
+						</form>
+					</li>
+				</ul>
+			</div>
+			<!-- Nut dropdown -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
+	<!-- END nav -->
+	<div class="hero-wrap img"
+		th:style="'background-image: url(/user/assets/images/bg_1.jpg);'">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-10 d-flex align-items-center ">
+					<div class="text text-center pt-5 mt-md-5">
+						<p class="mb-4">Tìm việc làm, Cơ hội việc làm và Nghề nghiệp</p>
+						<h1 class="mb-5">Cách dễ dàng nhất để có được công việc mới
+							của bạn</h1>
+						<div class="ftco-counter ftco-no-pt ftco-no-pb">
+							<div class="row">
+								<div
+									class="col-md-4 d-flex justify-content-center counter-wrap ">
+									<div class="block-18">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-visitor"></span>
+											</div>
+											<div class="desc text-left">
+												<strong class="number" data-number="46"
+													th:text="${numberCandidate}"></strong> <span>Ứng cử
+													viên</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div
+									class="col-md-4 d-flex justify-content-center counter-wrap ">
+									<div class="block-18 text-center">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-visitor"></span>
+											</div>
+											<div class="desc text-left">
+												<strong class="number" data-number="450"
+													th:text="${numberCompany}"></strong> <span>Công ty</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 d-flex justify-content-center counter-wrap">
+									<div class="block-18 text-center">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-resume"></span>
+											</div>
+											<div class="desc text-left">
+												<strong class="number" data-number="80000"
+													th:text="${numberRecruitment}"></strong> <span>Tuyển
+													dụng</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ftco-search my-md-5">
+							<div class="row">
+								<div class="col-md-12 nav-link-wrap">
+									<div class="nav nav-pills text-center" id="v-pills-tab"
+										role="tablist" aria-orientation="vertical">
+										<a class="nav-link active mr-md-1" id="v-pills-1-tab"
+											data-toggle="pill" href="#v-pills-1" role="tab"
+											aria-controls="v-pills-1" aria-selected="true">Tìm công
+											việc</a> <a class="nav-link" id="v-pills-2-tab"
+											data-toggle="pill" href="#v-pills-2" role="tab"
+											aria-controls="v-pills-2" aria-selected="false">Tìm theo
+											công ty </a> <a class="nav-link" id="v-pills-3-tab"
+											data-toggle="pill" href="#v-pills-3" role="tab"
+											aria-controls="v-pills-3" aria-selected="false">Tìm theo
+											địa điểm</a>
+
+									</div>
+								</div>
+								<div class="col-md-12 tab-wrap">
+
+									<div class="tab-content p-4" id="v-pills-tabContent">
+
+										<div class="tab-pane fade show active" id="v-pills-1"
+											role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+											<form th:action="@{/post/searchByTitle}" method="post"
+												class="search-job">
+												<div class="row no-gutters">
+
+													<div class="col-md-10 mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="icon">
+																	<span class="icon-map-marker"></span>
+																</div>
+																<input type="text" name="keySearch" class="form-control"
+																	placeholder="Tìm kiếm công việc">
+															</div>
+														</div>
+													</div>
+													<div class="col-md">
+														<div class="form-group">
+															<div class="form-field">
+																<button type="submit"
+																	class="form-control btn btn-primary">Tìm kiếm</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+											aria-labelledby="v-pills-performance-tab">
+											<form th:action="@{/post/searchByCompanyName}" method="post"
+												class="search-job">
+												<div class="row no-gutters">
+
+													<div class="col-md-10 mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="icon">
+																	<span class="icon-map-marker"></span>
+																</div>
+																<input type="text" name="keySearch" class="form-control"
+																	placeholder="Tìm kiếm theo công ty">
+															</div>
+														</div>
+													</div>
+													<div class="col-md">
+														<div class="form-group">
+															<div class="form-field">
+																<button type="submit"
+																	class="form-control btn btn-primary">Tìm kiếm</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="tab-pane fade" id="v-pills-3" role="tabpanel"
+											aria-labelledby="v-pills-performance-tab">
+											<form th:action="@{/post/searchByAddress}" method="post"
+												class="search-job">
+												<div class="row no-gutters">
+
+													<div class="col-md-10 mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="icon">
+																	<span class="icon-map-marker"></span>
+																</div>
+																<input type="text" name="keySearch" class="form-control"
+																	placeholder="Tìm kiếm theo địa điểm">
+															</div>
+														</div>
+													</div>
+													<div class="col-md">
+														<div class="form-group">
+															<div class="form-field">
+																<button type="submit"
+																	class="form-control btn btn-primary">Tìm kiếm</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<h4 style="margin-top: -20px">
+				Kết quả tìm kiếm cho : <span th:text="${keySearch}"></span>
+			</h4>
+			<div class="row">
+				<div class="col-lg-12 pr-lg-5">
+					<div class="row">
+						<th:block th:if="${totalPages > 0}"
+							th:each="recruitment : ${recruitments}">
+							<div class="col-md-12 ">
+								<div
+									class="job-post-item p-4 d-block d-lg-flex align-items-center">
+									<div class="one-third mb-4 mb-md-0">
+										<div class="job-post-item-header align-items-center">
+											<span class="subadge" th:text="${recruitment.type}"></span>
+											<h2 class="mr-3 text-black">
+												<a th:text="${recruitment.title}"
+													th:href="@{'/post/showDetailPost/' +${recruitment.id}}"></a>
+											</h2>
+										</div>
+										<div class="job-post-item-body d-block d-md-flex">
+											<div class="mr-3">
+												<span class="icon-layers"></span> <a
+													th:href="@{'/company/showDetailCompany/' + ${recruitment.company.id}}"
+													th:text="${recruitment.company.companyName}"></a>
+											</div>
+											<div>
+												<span class="icon-my_location"></span> <span
+													th:text="${recruitment.address}"></span>
+											</div>
+										</div>
+									</div>
+									<input type="hidden" th:id="${'idRe'}+${recruitment.id}"
+										th:value="${recruitment.id}">
+									<div
+										class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
+										<a data-toggle="modal"
+											th:data-target="${'#exampleModal'}+${recruitment.id}"
+											class="btn btn-primary py-2"
+											th:if="${userLoggedIn.role.id == 2}">Apply Job</a>
+									</div>
+								</div>
+							</div>
+							<!-- end -->
+							<!-- Modal -->
+							<div class="modal fade"
+								th:id="${'exampleModal'}+${recruitment.id}" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">
+												Ứng tuyển: <span th:text="${recruitment.title}"></span>
+											</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<form method="post"
+											th:action="@{'/applyJob/' + ${recruitment.id}}"
+											enctype="multipart/form-data">
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-12">
+														<select th:id="${'choose'}+${recruitment.id}"
+															name="cvOption"
+															th:onchange="'choosed(' +${recruitment.id}+ ')'"
+															class="form-control" aria-label="Default select example">
+															<option selected>Chọn phương thức nộp</option>
+															<option value="1">Dùng cv đã cập nhật</option>
+															<option value="2">Nộp cv mới</option>
+														</select>
+													</div>
+													<div th:id="${'loai1'}+${recruitment.id}"
+														style="display: none" class="col-12">
+														<label for="fileUpload" class="col-form-label">Giới
+															thiệu:</label>
+														<textarea rows="10" cols="3" class="form-control"
+															name="description">
+
+                                                    </textarea>
+													</div>
+													<div th:id="${'loai2'}+${recruitment.id}"
+														style="display: none" class="col-12">
+
+														<label for="fileUpload" class="col-form-label">Chọn
+															cv:</label> <input type="file" class="form-control"
+															th:id="${'fileUpload'}+${recruitment.id}" name="file">
+														<label for="fileUpload" class="col-form-label">Giới
+															thiệu:</label>
+														<textarea rows="10" cols="3" class="form-control"
+															name="description">
+
+                                                    </textarea>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Đóng</button>
+													<button type="submit" class="btn btn-primary">Nộp</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</th:block>
+						<div style="text-align: center" th:if="${totalPages == 0}">
+							<p style="color: red">Không có kết quả nào</p>
+						</div>
+					</div>
+
+					<div>
+						<ul class="pagination" th:if="${totalPages != 0}">
+							<li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+								class="page-item" th:class="${i == currentPage} ? 'active' : ''"><a
+								class="page-link"
+								th:href="@{/post/searchByTitle(keySearch=${keySearch}, page=${i}, size=5)}"
+								th:text="${i + 1}"></a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<script>
+		function choosed(id) {
+			var name = '#choose' + id;
+			var name1 = 'loai1' + id;
+			var name2 = 'loai2' + id;
+			var button1 = 'button1' + id;
+			var button2 = 'button2' + id;
+			var giaitri = $(name).val();
+			if (giaitri == 1) {
+				document.getElementById(name1).style.display = 'block'
+				document.getElementById(name2).style.display = 'none'
+				document.getElementById(button1).style.display = 'block'
+				document.getElementById(button2).style.display = 'none'
+			} else {
+				document.getElementById(name2).style.display = 'block'
+				document.getElementById(name1).style.display = 'none'
+				document.getElementById(button2).style.display = 'block'
+				document.getElementById(button1).style.display = 'none'
+			}
+		}
+	</script>
+
+
+
+	<footer class="ftco-footer ftco-bg-dark ftco-section">&nbsp;&copy;
+		Copyright 2024 </footer>
+
+</body>
+</html>
